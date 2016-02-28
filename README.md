@@ -6,19 +6,19 @@ Simple example of implementing a multi-user multi-chatroom server in Java. It's 
 - Streams
 - ServerSocket
 
-This project was done over the course of two days. There's a lot of features missing for a full fledged IRC replacement, but it's half way there.
+This project was done over the course of two days. There's a ton of missing features. I wouldn't replace your favorite IRC with this just yet.
 
 ## Getting started
 
-*Server*
+### Server
 
 Load into your favorite IDE and run *Server* as it contains the main().
 
-*Client*
+### Client
 
 Log into the server an follow the on screen instructions. It will ask you to pick a username, followed by a chatroom you're interested in joining.
 
-`telnet localhost 9000`
+    telnet localhost 9000
 
 ## Screenshot
 
