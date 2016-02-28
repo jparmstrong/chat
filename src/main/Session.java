@@ -33,14 +33,12 @@ public class Session implements Runnable,Observer {
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             out = new PrintWriter(socket.getOutputStream(), true);
 
-            clearScreen();
             println("Connected!");
             name = requestName();
             chatroom = requestChatroom();
             clearScreen();
             println("Joining "+chatroom.getName().toUpperCase());
             chatroom.join(this);
-
             messagePrompt();
 
         } catch (IOException e) {
@@ -63,8 +61,8 @@ public class Session implements Runnable,Observer {
             msg = cleanString(in.readLine());
             print("\b");
             chatroom.write(new Message(name,msg));
-            if (Thread.interrupted()) {
-                System.out.print("Thread interrupted");
+            if (Thread.interrupted() || msg == null || msg.equals("\\quit")) {
+                System.out.println("Thread interrupted");
                 return;
             }
         }
@@ -75,7 +73,10 @@ public class Session implements Runnable,Observer {
         while (true) {
             print("Username: ");
             n = cleanString(in.readLine());
-            if (Server.checkAndAddName(n)) {
+            if (n == null || n.length()<2) {
+                println("Sorry '"+n+"' is too short. It must be at least 2 characters.");
+            }
+            else if (Server.checkAndAddName(n)) {
                 println("Welcome, "+ n + "!");
                 break;
             }
@@ -127,7 +128,7 @@ public class Session implements Runnable,Observer {
     }
 
     private String cleanString(String s) {
-        return s.replaceAll("[^\\x20-\\x7E]", "");
+        return (s==null) ? null : s.replaceAll("[^\\x20-\\x7E]", "");
     }
 
 }

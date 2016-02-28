@@ -7,15 +7,21 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * chat
+ * <p>
+ * Created by jp on 2/28/16.
+ */
 public class Server {
 
-    final static int PORT = 9000;
-    public static List<String> names = new ArrayList<String>();
+    private final static int PORT = 9000;
+    private final static List<String> names = new ArrayList<>();
 
     public static void main(String[] args) throws IOException {
 
         ExecutorService es = Executors.newFixedThreadPool(16);
 
+        // Create the se
         ChatRoomFactory chatRoomFactory = ChatRoomFactory.getInstance();
         chatRoomFactory.getChatRoom("watercooler");
         chatRoomFactory.getChatRoom("dev");
