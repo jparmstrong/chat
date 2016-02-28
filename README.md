@@ -16,10 +16,10 @@ Load into your favorite IDE and run *Server* as it contains the main().
 
 ### Client
 
-Log into the server an follow the on screen instructions. It will ask you to pick a username, followed by a chatroom you're interested in joining.
+Log onto chat server and follow the on-screen instructions. It will ask you to pick a username, followed by a chatroom you're interested in joining. If there was an existing conversation, it will bring you up to speed!
 
     telnet localhost 9000
 
 ## Screenshot
 
-![](img/shot1.png)
+![](img/sshot.png)
