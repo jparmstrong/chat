@@ -15,6 +15,7 @@ public class ChatRoomFactory {
 
     private ChatRoomFactory() { }
 
+    // will retrieve existing chatroom or create a new one for the user
     public synchronized ChatRoom getChatRoom(String name) {
         if (chatrooms.containsKey(name)) {
             return chatrooms.get(name);

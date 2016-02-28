@@ -34,8 +34,14 @@ public class Session implements Runnable,Observer {
             out = new PrintWriter(socket.getOutputStream(), true);
 
             println("Connected!");
+
+            // request a username
             name = requestName();
+
+            // print available chatrooms and let the user choose.
             chatroom = requestChatroom();
+
+            // join the chatroom and start chatting!
             clearScreen();
             println("Joining "+chatroom.getName().toUpperCase());
             chatroom.join(this);
@@ -45,6 +51,8 @@ public class Session implements Runnable,Observer {
             e.printStackTrace();
         }
         finally {
+            // if user disconnects, notify everyone in the chatroom, remove it from reserved usernames and close
+            // their socket connection.
             chatroom.leave(this);
             Server.removeName(name);
             try {
@@ -112,6 +120,7 @@ public class Session implements Runnable,Observer {
         print("\u001b[2J");
     }
 
+    // request coming from the Observable chatroom
     @Override
     public void update(Observable o, Object arg) {
         if(arg.getClass().equals(Message.class)) {

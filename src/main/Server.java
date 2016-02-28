@@ -21,7 +21,7 @@ public class Server {
 
         ExecutorService es = Executors.newFixedThreadPool(16);
 
-        // Create the se
+        // Create several chatrooms, giving the users something to pick from
         ChatRoomFactory chatRoomFactory = ChatRoomFactory.getInstance();
         chatRoomFactory.getChatRoom("watercooler");
         chatRoomFactory.getChatRoom("dev");
@@ -38,11 +38,12 @@ public class Server {
         }
 
     }
-
+    // remove the user when they're disconnected.
     public synchronized static void removeName(String n) {
         Server.names.remove(n);
     }
 
+    // As part of the sign on process, there can only be one user with the same name.
     public synchronized static boolean checkAndAddName(String n) {
         synchronized (names) {
             if (!names.contains(n)) {
