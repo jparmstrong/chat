@@ -1,7 +1,6 @@
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.Set;
 
 /**
  * chat
@@ -25,8 +24,8 @@ public class ChatRoomFactory {
         return cr;
     }
 
-    public synchronized List<String> getChatroomNames() {
-        return chatrooms.values().stream().map(ChatRoom::getName).collect(Collectors.toList());
+    public synchronized Set<String> getChatroomNames() {
+        return chatrooms.keySet();
     }
 
     public static ChatRoomFactory getInstance() {

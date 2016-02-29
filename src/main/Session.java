@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Set;
 
 /**
  * chat
@@ -64,9 +65,8 @@ public class Session implements Runnable,Observer {
     }
 
     private void messagePrompt() throws IOException {
-        String msg = "";
         while (true) {
-            msg = cleanString(in.readLine());
+            String msg = cleanString(in.readLine());
             print("\b");
             chatroom.write(new Message(name,msg));
             if (Thread.interrupted() || msg == null || msg.equals("\\quit")) {
@@ -77,10 +77,10 @@ public class Session implements Runnable,Observer {
     }
 
     public String requestName() throws IOException {
-        String n = "";
+        String n;
         while (true) {
             print("Username: ");
-            n = cleanString(in.readLine());
+             n = cleanString(in.readLine());
             if (n == null || n.length()<2) {
                 println("Sorry '"+n+"' is too short. It must be at least 2 characters.");
             }
@@ -97,7 +97,7 @@ public class Session implements Runnable,Observer {
 
     public ChatRoom requestChatroom() throws IOException {
         ChatRoomFactory crf = ChatRoomFactory.getInstance();
-        List<String> crl = crf.getChatroomNames();
+        Set<String> crl = crf.getChatroomNames();
 
         println("SELECT A CHATROOM YOU WISH TO ENTER!");
         crl.forEach(this::println);
